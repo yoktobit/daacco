@@ -35,14 +35,14 @@ class DaaccoR2dbcApplicationTests {
 		stop.start();
 		Iterable<FooEntity> loadedFooEntities = fooRepository.findAll().toIterable();
 		stop.stop();
-		LOG.info("Repo-Variante Find Foo Dauer: {}", stop.getLastTaskTimeMillis());
+		LOG.info("R2DBC-Variante Find Foo Dauer: {}", stop.getLastTaskTimeMillis());
 		stop.start();
 		IntStream.range(0, 1000).forEach((i) -> {
 			BarEntity barEntity = barRepository.findByName("BARNAME1").block();
 			assertThat(barEntity).isNotNull();
 		});
 		stop.stop();
-		LOG.info("Repo-Variante Find Bar Dauer {}", stop.getLastTaskTimeMillis());
+		LOG.info("R2DBC-Variante Find Bar Dauer {}", stop.getLastTaskTimeMillis());
 		
 		assertThat(loadedFooEntities).hasSize(100000);
 		assertThat(loadedFooEntities.iterator().next().getName()).isEqualTo("Foo1");

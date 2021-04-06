@@ -40,7 +40,7 @@ public class DaaccoQuarkusApplicationTest {
 		Multi<FooEntity> loadedFooEntitiesMulti = fooDao.findAll();
         List<FooEntity> loadedFooEntities = loadedFooEntitiesMulti.collect().asList().await().indefinitely();
 		stop.stop();
-		LOG.info("Repo-Variante Find Foo Dauer: {}", stop.getTime(TimeUnit.MILLISECONDS));
+		LOG.info("Quarkus-Variante Find Foo Dauer: {}", stop.getTime(TimeUnit.MILLISECONDS));
 		stop.reset();
         stop.start();
 		IntStream.range(0, 1000).forEach((i) -> {
@@ -48,7 +48,7 @@ public class DaaccoQuarkusApplicationTest {
 			assertNotNull(barEntity);
 		});
 		stop.stop();
-		LOG.info("Repo-Variante Find Bar Dauer {}", stop.getTime(TimeUnit.MILLISECONDS));
+		LOG.info("Quarkus-Variante Find Bar Dauer {}", stop.getTime(TimeUnit.MILLISECONDS));
 		
         assertTrue(loadedFooEntities.size() == 100000);
     }

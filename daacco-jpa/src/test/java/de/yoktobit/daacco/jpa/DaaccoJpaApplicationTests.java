@@ -1,8 +1,6 @@
 package de.yoktobit.daacco.jpa;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
-
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -43,14 +41,14 @@ class DaaccoJpaApplicationTests {
 		stop.start(); 
 		List<FooEntity> loadedFooEntities = fooRepository.findAll();
 		stop.stop();
-		LOG.info("Find Foo Dauer: {}", stop.getLastTaskTimeMillis());
+		LOG.info("JPA-Variante Find Foo Dauer: {}", stop.getLastTaskTimeMillis());
 		stop.start();
 		IntStream.range(0, 1000).forEach((i) -> {
 			BarEntity barEntity = barRepository.findByName("BARNAME1");
 			assertThat(barEntity).isNotNull();
 		});
 		stop.stop();
-		LOG.info("Find Bar Dauer {}", stop.getLastTaskTimeMillis());
+		LOG.info("JPA-Variante Find Bar Dauer {}", stop.getLastTaskTimeMillis());
 		
 		assertThat(loadedFooEntities).hasSize(100000);
 	}
