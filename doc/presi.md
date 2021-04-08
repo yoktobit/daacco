@@ -1,5 +1,5 @@
 ---
-marp: true
+marp: false
 ---
 <!-- 
 _class: lead 
@@ -90,3 +90,17 @@ Transaktions-Abstraktion
 | Query-Abstraktion | X | X |
 | Optimistic Locking | | X |
 | Manuelles Batching | X | | 	
+
+---
+
+# Beispiel
+## Datenmodell
+
+```plantuml
+@startuml
+entity [FooEntity]
+entity FooSubEntity
+entity BarEntity
+FooEntity "1" ||--o{ "*" FooSubEntity
+@enduml
+```
