@@ -78,4 +78,16 @@ class DaaccoJpaApplicationTests {
 		}
 		this.entityManager.flush();
 	}
+
+	@Test
+	@Transactional
+	void insertsLotsOfDataWithFlushForEach() {
+
+		for (int index = 1; index <= 1000; index++) {
+			FooEntity fooEntity = new FooEntity();
+			fooEntity.setName("ForLoop " + index);
+			this.entityManager.persist(fooEntity);
+			this.entityManager.flush();
+		}
+	}
 }
