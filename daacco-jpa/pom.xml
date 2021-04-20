@@ -38,16 +38,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
+		</dependency>-->
+		<!--<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
@@ -79,13 +79,13 @@
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
+			<!--<dependency>
 				<groupId>org.testcontainers</groupId>
 				<artifactId>testcontainers-bom</artifactId>
 				<version>${testcontainers.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
+			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 

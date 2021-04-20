@@ -1,9 +1,12 @@
 package de.yoktobit.daacco.jpa;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
@@ -12,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StopWatch;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import de.yoktobit.daacco.jpa.foomanagement.dataaccess.api.BarEntity;
 import de.yoktobit.daacco.jpa.foomanagement.dataaccess.api.FooEntity;
@@ -20,7 +22,6 @@ import de.yoktobit.daacco.jpa.foomanagement.dataaccess.api.repo.BarRepository;
 import de.yoktobit.daacco.jpa.foomanagement.dataaccess.api.repo.FooRepository;
 
 @SpringBootTest
-@Testcontainers
 class DaaccoJpaApplicationTests {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DaaccoJpaApplicationTests.class);
@@ -31,10 +32,12 @@ class DaaccoJpaApplicationTests {
 	@Autowired
 	private BarRepository barRepository;
 
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	@Test
-	//@Sql(scripts = "inserts.sql")
 	@Transactional
-	void selectsEntities() {
+	void selectsDataByJpaRepo() {
 		
 		StopWatch stop = new StopWatch();
 		stop.setKeepTaskList(true);
@@ -53,4 +56,26 @@ class DaaccoJpaApplicationTests {
 		assertThat(loadedFooEntities).hasSize(100000);
 	}
 
+	@Test
+	@Transactional
+	void insertsLotsOfDataNeverReallyExecuted() {
+
+		for (int index = 1; index <= 1000; index++) {
+			FooEntity fooEntity = new FooEntity();
+			fooEntity.setName("ForLoop " + index);
+			this.entityManager.persist(fooEntity);
+		}
+	}
+
+	@Test
+	@Transactional
+	void insertsLotsOfDataWithFlush() {
+
+		for (int index = 1; index <= 1000; index++) {
+			FooEntity fooEntity = new FooEntity();
+			fooEntity.setName("ForLoop " + index);
+			this.entityManager.persist(fooEntity);
+		}
+		this.entityManager.flush();
+	}
 }
