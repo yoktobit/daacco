@@ -1,0 +1,9 @@
+@startuml Datenmodell
+
+entity [FooEntity] 
+entity FooSubEntity 
+entity BarEntity 
+
+FooEntity "1" ||--o{ "*" FooSubEntity 
+
+@enduml

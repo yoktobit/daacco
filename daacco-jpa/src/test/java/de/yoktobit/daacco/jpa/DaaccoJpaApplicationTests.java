@@ -64,6 +64,7 @@ class DaaccoJpaApplicationTests {
 			FooEntity fooEntity = new FooEntity();
 			fooEntity.setName("ForLoop " + index);
 			this.entityManager.persist(fooEntity);
+			assertThat(fooEntity).isNotNull();
 		}
 	}
 
@@ -75,6 +76,7 @@ class DaaccoJpaApplicationTests {
 			FooEntity fooEntity = new FooEntity();
 			fooEntity.setName("ForLoop " + index);
 			this.entityManager.persist(fooEntity);
+			assertThat(fooEntity).isNotNull();
 		}
 		this.entityManager.flush();
 	}
@@ -88,6 +90,7 @@ class DaaccoJpaApplicationTests {
 			fooEntity.setName("ForLoop " + index);
 			this.entityManager.persist(fooEntity);
 			this.entityManager.flush();
+			assertThat(fooEntity).isNotNull();
 		}
 	}
 }
